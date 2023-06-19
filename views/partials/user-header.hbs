@@ -1,0 +1,46 @@
+<header class="">
+    <nav class="navbar bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">SMart ShoPPy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SMart ShoPPy</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cart">Cart<span class="badge bg-info" style="margin-left:5px;" id="cart-count">{{cartCount}}</span></a>
+                        </li>
+                        {{#if user}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/all-orders">Orders</a>
+                        </li>
+                        {{/if}}
+                        <li class="nav-item">
+                            {{#if user}}
+                              <a class="nav-link active" href="/">{{user.Name}}</a>
+                            {{else}}
+                              <a class="nav-link active" href="/login">Account</a>
+                            {{/if}}  
+                            
+                            {{#if user}}
+                             <a class="nav-link" href="/logout">Sign Out</a>
+                            {{else}}
+                             <a class="nav-link" href="/login">Sign In</a>  
+                            {{/if}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

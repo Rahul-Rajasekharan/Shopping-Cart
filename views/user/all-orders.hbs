@@ -1,0 +1,40 @@
+<section class="mt-5">
+    <div class="container-fluid pt-5">
+        <div class="col-md-12">
+            <table class="table table-dark table-striped pt-5">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Date</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Postcode</th>
+                        <th scope="col">Mobile</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Payment Type</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Options</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orders}}
+                    <tr>
+
+                        <td>{{this.date}}</td>
+                        <td>{{this.deliveryDetails.address}}</td>
+                        <td>{{this.deliveryDetails.postcode}}</td>
+                        <td>{{this.deliveryDetails.mobile}}</td>
+                        <td>£ {{this.total}}</td>
+                        <td>{{this.payment}}</td>
+                        <td>{{this.status}}</td>
+                        <td>
+                            <a href="/view-order-products/{{this._id}}" class="btn btn-primary">View Products</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

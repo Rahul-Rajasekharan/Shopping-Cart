@@ -1,0 +1,29 @@
+<section class="mt-5 pt-5">
+    <div class="container">
+        <h3 class="text-center">All orders</h3>
+        <div class="col-md-12 pt-4">
+            <table class="table  table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orderProducts}}   
+                    <tr>       
+                        <td><img src="/product-images/{{item}}.jpg" alt="" style="width: 3rem; height:4rem"></td>
+                        <td>{{product.Title}}</td>
+                        <td>{{product.Category}}</td>
+                        <td>{{quantity}}</td>
+                        <td>£ {{product.Price}}</td>     
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

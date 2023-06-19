@@ -1,0 +1,33 @@
+<section class="mt-5">
+    <div class="container">
+        <div class="row pt-5">
+
+            <div class="col-md-6 pl-5">
+                <h2 class="text-center">Edit Product</h2>
+                <form action="/admin/edit-products/{{product._id}}" method="post" enctype="multipart/form-data">
+                    <label for="">Title</label>
+                    <input type="text" name="Title" class="form-control" value="{{product.Title}}"><br>
+                    <label for="">Category</label>
+                    <input type="text" name="Category" class="form-control" value="{{product.Category}}"><br>
+                    <label for="">Description</label>
+                    <input type="text" name="Description" class="form-control" value="{{product.Description}}"><br>
+                    <label for="">Price (£)</label>
+                    <input type="text" name="Price" class="form-control" value="{{product.Price}}">
+                    <P>Please enter the price without any symbols or comma's</P><br>
+                    <label for="">Image</label><br>
+                    <img src="/product-images/{{product._id}}.jpg" alt="" class="p-3"style="width:9rem;height:10rem;" id="imageView">
+                    <input type="file" name="Image" id="pic" class="form-control" onchange="viewImage(event)"><br>
+
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+     function viewImage(event){
+        document.getElementById('imageView').src=URL.createObjectURL(event.target.files[0])
+     }
+</script>
