@@ -162,6 +162,7 @@ module.exports = {
     },
 
     getTotalAmount: (userId) => {
+        console.log("userid : ", userId);
         return new Promise(async (resolve, reject) => {
             let total = await db.get().collection(collection.CART_COLLECTION).aggregate([
                 {
@@ -220,6 +221,10 @@ module.exports = {
     },
 
     placeOrder: (orderDetails, products, totalPrice) => {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+        
+
         return new Promise((resolve, reject) => {
             let status = orderDetails['payment-method'] === "COD" ? 'placed' : 'pending'
             let orderObj = {
@@ -234,7 +239,7 @@ module.exports = {
                 total: totalPrice,
                 payment: orderDetails['payment-method'],
                 status: status,
-                date: new Date()
+                date:new Date().toLocaleDateString('en-US', options)
             }
 
             db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
@@ -297,7 +302,7 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
             var options = {
-                amount: total*100,
+                amount: total * 100,
                 currency: "INR",
                 receipt: '' + orderId,
             }
@@ -316,39 +321,39 @@ module.exports = {
         return new Promise((resolve, reject) => {
             const crypto = require("crypto");
             let hmac = crypto.createHmac('sha256', 'kJrqmufxfe9eLhpJtti7BEyN');
-            hmac.update(paymentDetails['paymentDetails[razorpay_order_id]']+'|'+paymentDetails['paymentDetails[razorpay_payment_id]'])
-            hmac=hmac.digest('hex')
-            if(hmac==paymentDetails['paymentDetails[razorpay_signature]']){
+            hmac.update(paymentDetails['paymentDetails[razorpay_order_id]'] + '|' + paymentDetails['paymentDetails[razorpay_payment_id]'])
+            hmac = hmac.digest('hex')
+            if (hmac == paymentDetails['paymentDetails[razorpay_signature]']) {
                 resolve()
-            }else{
+            } else {
                 reject()
             }
         })
     },
 
-    changePaymentStatus:(orderId)=>{
-        return new Promise((resolve,reject)=>{
+    changePaymentStatus: (orderId) => {
+        return new Promise((resolve, reject) => {
             db.get().collection(collection.ORDER_COLLECTION)
-            .updateOne({_id:new objectId(orderId)},
-            {
-                $set:{
-                    status:'placed'
-                }
-            }).then(()=>{
-                resolve()
-            })
+                .updateOne({ _id: new objectId(orderId) },
+                    {
+                        $set: {
+                            status: 'placed'
+                        }
+                    }).then(() => {
+                        resolve()
+                    })
         })
     },
 
-    removeCartProduct:(cartId,productId)=>{
-        return new Promise((resolve,reject)=>{
+    removeCartProduct: (cartId, productId) => {
+        return new Promise((resolve, reject) => {
             db.get().collection(collection.CART_COLLECTION).findOneAndUpdate(
-                {_id:new objectId(cartId)},
+                { _id: new objectId(cartId) },
                 {
-                    $pull:{products:{item:new objectId(productId)}} 
+                    $pull: { products: { item: new objectId(productId) } }
                 },
-                {returnOriginal:false}
-            ).then(()=>{
+                { returnOriginal: false }
+            ).then(() => {
                 resolve()
             })
         })

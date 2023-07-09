@@ -20,9 +20,9 @@
                         <td>{{this.product.Title}}</td>
 
                         <td>
-                            <button style="margin-right:1rem;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+                            <button style="margin-right:1rem;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
                             <span id="{{this.product._id}}">{{this.quantity}}</span>
-                            <button style="margin-left: 1rem;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+                            <button style="margin-left: 1rem;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button>
                         </td>
 
                         <td>£{{this.product.Price}}</td>
@@ -44,6 +44,7 @@
 
 <script>
     function changeQuantity(cartId, productId,userId,count) {
+        console.log(userId)
         let quantity = parseInt(document.getElementById(productId).innerHTML)
         count = parseInt(count)
         $.ajax({

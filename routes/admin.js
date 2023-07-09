@@ -37,7 +37,7 @@ router.post('/add-products',(req,res)=>{
        console.log('error'+err)
 
       }
-      res.render('admin/add-products')
+      res.render('admin/add-products',{admin:true})
     })
 
     
@@ -54,7 +54,7 @@ router.get('/delete-product/:id',(req,res)=>{
 
 router.get('/edit-products/:id',async(req,res)=>{
   let product= await productHelper.getProductDetails(req.params.id)
-  res.render('admin/edit-products',{product})
+  res.render('admin/edit-products',{product,admin:true})
 })
 
 router.post('/edit-products/:id',(req,res)=>{
@@ -68,6 +68,10 @@ router.post('/edit-products/:id',(req,res)=>{
   })
 
 })
+
+// router.get('/all-orders',(req,res)=>{
+//   res.render('user/all-orders',{admin:true})
+// })
 
 
 module.exports = router;
